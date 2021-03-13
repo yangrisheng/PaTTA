@@ -13,9 +13,12 @@ Image Test Time Augmentation with Paddle2.0!
 ```
 ## Table of Contents
 1. [Quick Start](#quick-start)
-2. [Transforms](#transforms)
-3. [Aliases](#aliases)
-4. [Merge modes](#merge-modes)
+- [Test](#Test)
+- [Predict](#Predict)
+- [Use Tools](#Use-Tools)
+2. [Transforms](#Advanced-Examples (DIY Transforms))
+3. [Aliases](#Aliases (Combos))
+4. [Merge modes](#Merge-modes)
 5. [Installation](#installation)
 
 ## Quick start (Default Transforms)
@@ -59,7 +62,16 @@ tta_model = tta.ClassificationTTAWrapper(model, tta.aliases.five_crop_transform(
 tta_model = tta.KeypointsTTAWrapper(model, tta.aliases.flip_transform(), scaled=True)
 ```
 
-## Advanced Examples (DIY Transforms)
+#### Use-Tools
+#####  Segmentation model [[docstring](tools/seg.py)]:
+```python
+python seg.py --model_path='output/model' \
+                 --batch_size=16 \
+                 --test_dataset='test.txt'
+```
+**Note**: Related to [paddleseg](https://github.com/PaddlePaddle/Paddleseg)
+
+## Advanced-Examples (DIY Transforms)
 #####  Custom transform:
 ```python
 # defined 2 * 2 * 3 * 3 = 36 augmentations !
@@ -122,7 +134,7 @@ mask = mean(masks)
   - five_crop_transform (corner crops + center crop)
   - ten_crop_transform (five crops + five crops on horizontal flip)
   
-## Merge modes
+## Merge-modes
  - mean
  - gmean (geometric mean)
  - sum
